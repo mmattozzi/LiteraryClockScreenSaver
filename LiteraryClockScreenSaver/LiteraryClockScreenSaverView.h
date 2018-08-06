@@ -10,4 +10,9 @@
 
 @interface LiteraryClockScreenSaverView : ScreenSaverView
 
+@property (retain) NSMutableDictionary *timeToQuote;
+@property NSInteger fileLength;
+@property (retain) NSString* resourcePath;
+@property CGFloat lastY;
+
 @end

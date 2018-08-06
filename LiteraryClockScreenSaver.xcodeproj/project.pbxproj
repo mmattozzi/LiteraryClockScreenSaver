@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF75D32F2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF75D32E2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h */; };
 		AF75D3312117FB2F00E918C5 /* LiteraryClockScreenSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF75D3302117FB2F00E918C5 /* LiteraryClockScreenSaverView.m */; };
+		AF75D3392117FB6000E918C5 /* litclock_annotated.csv in Resources */ = {isa = PBXBuildFile; fileRef = AF75D3382117FB6000E918C5 /* litclock_annotated.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		AF75D32E2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiteraryClockScreenSaverView.h; sourceTree = "<group>"; };
 		AF75D3302117FB2F00E918C5 /* LiteraryClockScreenSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiteraryClockScreenSaverView.m; sourceTree = "<group>"; };
 		AF75D3322117FB2F00E918C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF75D3382117FB6000E918C5 /* litclock_annotated.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = litclock_annotated.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 		AF75D3212117FB2F00E918C5 = {
 			isa = PBXGroup;
 			children = (
+				AF75D3382117FB6000E918C5 /* litclock_annotated.csv */,
 				AF75D32D2117FB2F00E918C5 /* LiteraryClockScreenSaver */,
 				AF75D32C2117FB2F00E918C5 /* Products */,
 			);
@@ -123,6 +126,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF75D3392117FB6000E918C5 /* litclock_annotated.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
