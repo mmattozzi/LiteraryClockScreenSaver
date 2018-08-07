@@ -99,16 +99,14 @@
     quoteRect.size.width = quoteRect.size.width - 200.0;
     quoteRect.size.height = 100.0;
     
-    NSFont* font = [NSFont fontWithName:@"Helvetica Bold" size:24.0];
+    NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:24.0];
     
     if (timeString) {
-        //[timeString drawAtPoint:NSMakePoint(100.0, lastY) withAttributes:nil];
         [timeString drawInRect:quoteRect withAttributes:@{
                NSForegroundColorAttributeName: [NSColor lightGrayColor],
                NSFontAttributeName: font
             }];
     } else {
-        //[formattedTime drawAtPoint:NSMakePoint(100.0, lastY) withAttributes:nil];
         [formattedTime drawInRect:quoteRect withAttributes:@{
                                                              NSForegroundColorAttributeName: [NSColor lightGrayColor],
                                                              NSFontAttributeName: font
