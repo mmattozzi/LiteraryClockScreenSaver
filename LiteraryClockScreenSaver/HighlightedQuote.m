@@ -26,6 +26,9 @@
 
 - (NSRange) rangeOfHighlight {
     NSRange range = [self.quote rangeOfString:self.timeString];
+    if (range.length == 0) {
+        NSLog(@"Problem finding %@ in quote %@", self.timeString, self.quote);
+    }
     return range;
 }
 

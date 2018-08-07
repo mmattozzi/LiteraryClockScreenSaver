@@ -111,7 +111,6 @@
     NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:24.0];
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:36.0];
-    NSLog(@"Font name for bold = %@", [boldFontName fontName]);
     
     if (timeQuote) {
         NSMutableAttributedString *highlightedString = [[NSMutableAttributedString alloc] initWithString:timeQuote.quote];
