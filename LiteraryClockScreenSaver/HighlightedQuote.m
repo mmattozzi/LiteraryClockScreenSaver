@@ -25,7 +25,8 @@
 }
 
 - (NSRange) rangeOfHighlight {
-    return [self.quote rangeOfString:self.timeString];
+    NSRange range = [self.quote rangeOfString:self.timeString];
+    return range;
 }
 
 @end

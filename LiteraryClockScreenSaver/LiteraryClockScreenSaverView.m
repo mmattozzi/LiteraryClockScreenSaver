@@ -91,6 +91,9 @@
     NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
     NSString *formattedTime = [NSString stringWithFormat:@"%@:%@", paddedHour, paddedMinute];
     
+    // Good test time
+    // NSString *formattedTime = @"23:31";
+    
     [[NSColor blackColor] setFill];
     NSRectFill(self.bounds);
     [[NSColor lightGrayColor] set];
@@ -106,12 +109,20 @@
     quoteRect.size.height = 100.0;
     
     NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:24.0];
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:36.0];
+    NSLog(@"Font name for bold = %@", [boldFontName fontName]);
     
     if (timeQuote) {
-        [timeQuote.quote drawInRect:quoteRect withAttributes:@{
-               NSForegroundColorAttributeName: [NSColor lightGrayColor],
-               NSFontAttributeName: font
-            }];
+        NSMutableAttributedString *highlightedString = [[NSMutableAttributedString alloc] initWithString:timeQuote.quote];
+        NSRange fullStringRange = NSMakeRange(0, [highlightedString length]);
+        [highlightedString beginEditing];
+        [highlightedString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:fullStringRange];
+        [highlightedString addAttribute:NSFontAttributeName value:font range:fullStringRange];
+        [highlightedString addAttribute:NSFontAttributeName value:boldFontName range:[timeQuote rangeOfHighlight]];
+        [highlightedString endEditing];
+        
+        [highlightedString drawInRect:quoteRect];
     } else {
         [formattedTime drawInRect:quoteRect withAttributes:@{
                                                              NSForegroundColorAttributeName: [NSColor lightGrayColor],
