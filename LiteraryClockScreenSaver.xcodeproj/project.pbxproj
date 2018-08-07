@@ -10,6 +10,8 @@
 		AF75D32F2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF75D32E2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h */; };
 		AF75D3312117FB2F00E918C5 /* LiteraryClockScreenSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF75D3302117FB2F00E918C5 /* LiteraryClockScreenSaverView.m */; };
 		AF75D3392117FB6000E918C5 /* litclock_annotated.csv in Resources */ = {isa = PBXBuildFile; fileRef = AF75D3382117FB6000E918C5 /* litclock_annotated.csv */; };
+		AF75D33C2119428C00E918C5 /* HighlightedQuote.h in Headers */ = {isa = PBXBuildFile; fileRef = AF75D33A2119428C00E918C5 /* HighlightedQuote.h */; };
+		AF75D33D2119428C00E918C5 /* HighlightedQuote.m in Sources */ = {isa = PBXBuildFile; fileRef = AF75D33B2119428C00E918C5 /* HighlightedQuote.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		AF75D3302117FB2F00E918C5 /* LiteraryClockScreenSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiteraryClockScreenSaverView.m; sourceTree = "<group>"; };
 		AF75D3322117FB2F00E918C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF75D3382117FB6000E918C5 /* litclock_annotated.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = litclock_annotated.csv; sourceTree = "<group>"; };
+		AF75D33A2119428C00E918C5 /* HighlightedQuote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighlightedQuote.h; sourceTree = "<group>"; };
+		AF75D33B2119428C00E918C5 /* HighlightedQuote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HighlightedQuote.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 				AF75D32E2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h */,
 				AF75D3302117FB2F00E918C5 /* LiteraryClockScreenSaverView.m */,
 				AF75D3322117FB2F00E918C5 /* Info.plist */,
+				AF75D33A2119428C00E918C5 /* HighlightedQuote.h */,
+				AF75D33B2119428C00E918C5 /* HighlightedQuote.m */,
 			);
 			path = LiteraryClockScreenSaver;
 			sourceTree = "<group>";
@@ -66,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF75D32F2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h in Headers */,
+				AF75D33C2119428C00E918C5 /* HighlightedQuote.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF75D33D2119428C00E918C5 /* HighlightedQuote.m in Sources */,
 				AF75D3312117FB2F00E918C5 /* LiteraryClockScreenSaverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 //
 
 #import "LiteraryClockScreenSaverView.h"
+#import "HighlightedQuote.h"
 
 @implementation LiteraryClockScreenSaverView
 
@@ -47,8 +48,13 @@
                                                               range:NSMakeRange(0, [row length])];
         if (numberOfMatches > 0) {
             NSArray* columns = [row componentsSeparatedByString:@"|"];
-            [timeToQuote setObject:columns[2] forKey:columns[0]];
-            NSLog(@"%ld quotes stored.", [timeToQuote count]);
+            if ([columns count] == 5) {
+                HighlightedQuote *highlightedQuote = [HighlightedQuote initWithQuote:columns[2] author:columns[4] book:columns[3] timeString:columns[1]];
+                [timeToQuote setObject:highlightedQuote forKey:columns[0]];
+                NSLog(@"%ld quotes stored.", [timeToQuote count]);
+            } else {
+                NSLog(@"%@ does not seem formatted correctly; not enough columns.", row);
+            }
         } else {
             NSLog(@"%@ does not seem formatted correctly.", row);
         }
@@ -89,7 +95,7 @@
     NSRectFill(self.bounds);
     [[NSColor lightGrayColor] set];
     
-    NSString *timeString = [timeToQuote valueForKey:formattedTime];
+    HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
     if (lastY > self.bounds.size.height) {
         lastY = 0;
     }
@@ -101,8 +107,8 @@
     
     NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:24.0];
     
-    if (timeString) {
-        [timeString drawInRect:quoteRect withAttributes:@{
+    if (timeQuote) {
+        [timeQuote.quote drawInRect:quoteRect withAttributes:@{
                NSForegroundColorAttributeName: [NSColor lightGrayColor],
                NSFontAttributeName: font
             }];
