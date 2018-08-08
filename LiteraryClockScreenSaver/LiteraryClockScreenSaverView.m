@@ -23,12 +23,20 @@
         [self setAnimationTimeInterval:1/30.0];
     }
     
+    NSString *pathOfLibraryImage = [[NSBundle bundleForClass:[self class]] pathForResource:@"library1" ofType:@"jpg"];
+    libraryImage1 = [[NSImage alloc] initWithContentsOfFile:pathOfLibraryImage];
+    NSLog(@"Image = %f x %f", [libraryImage1 size].width, [libraryImage1 size].height);
+    
     NSString* timeFormat = @"^\\d\\d:\\d\\d";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^\\d\\d"
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:nil];
     
     lastY = 200.0;
+    backgroundImageRect = self.bounds;
+    backgroundImageRect.size.height = backgroundImageRect.size.height*1.2;
+    backgroundImageRect.size.width = backgroundImageRect.size.width*1.2;
+    backgroundImageRect.origin.x = 0 - (backgroundImageRect.size.width - self.bounds.size.width);
     
     timeToQuote = [[NSMutableDictionary alloc] init];
     
@@ -51,7 +59,6 @@
             if ([columns count] == 5) {
                 HighlightedQuote *highlightedQuote = [HighlightedQuote initWithQuote:columns[2] author:columns[4] book:columns[3] timeString:columns[1]];
                 [timeToQuote setObject:highlightedQuote forKey:columns[0]];
-                NSLog(@"%ld quotes stored.", [timeToQuote count]);
             } else {
                 NSLog(@"%@ does not seem formatted correctly; not enough columns.", row);
             }
@@ -59,6 +66,8 @@
             NSLog(@"%@ does not seem formatted correctly.", row);
         }
     }
+    
+    NSLog(@"Done loading quotes. %ld quotes stored.", [timeToQuote count]);
     
     return self;
 }
@@ -98,6 +107,12 @@
     NSRectFill(self.bounds);
     [[NSColor lightGrayColor] set];
     
+    backgroundImageRect.origin.x += 0.25;
+    if (backgroundImageRect.origin.x > 0) {
+        backgroundImageRect.origin.x = 0 - (backgroundImageRect.size.width - self.bounds.size.width);
+    }
+    [libraryImage1 drawInRect:backgroundImageRect];
+    
     HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
     if (lastY > self.bounds.size.height) {
         lastY = 0;
@@ -116,7 +131,7 @@
         NSMutableAttributedString *highlightedString = [[NSMutableAttributedString alloc] initWithString:timeQuote.quote];
         NSRange fullStringRange = NSMakeRange(0, [highlightedString length]);
         [highlightedString beginEditing];
-        [highlightedString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:fullStringRange];
+        [highlightedString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:fullStringRange];
         [highlightedString addAttribute:NSFontAttributeName value:font range:fullStringRange];
         [highlightedString addAttribute:NSFontAttributeName value:boldFontName range:[timeQuote rangeOfHighlight]];
         [highlightedString endEditing];
@@ -124,7 +139,7 @@
         [highlightedString drawInRect:quoteRect];
     } else {
         [formattedTime drawInRect:quoteRect withAttributes:@{
-                                                             NSForegroundColorAttributeName: [NSColor lightGrayColor],
+                                                             NSForegroundColorAttributeName: [NSColor whiteColor],
                                                              NSFontAttributeName: font
                                                              }];
     }
@@ -133,10 +148,12 @@
     lastY = lastY + 1;
     
     // Debug string
+    /*
     NSString *infoString = [NSString stringWithFormat:@"Path: %@, File length: %ld, Quote count: %ld, Time string: %@", resourcePath, fileLength, [timeToQuote count], formattedTime];
     [infoString drawAtPoint:NSMakePoint(100.0, 100.0) withAttributes:@{
                                                                        NSForegroundColorAttributeName: [NSColor lightGrayColor]
                                                                        }];
+     */
 }
 
 - (BOOL)hasConfigureSheet

@@ -8,11 +8,16 @@
 
 #import <ScreenSaver/ScreenSaver.h>
 
-@interface LiteraryClockScreenSaverView : ScreenSaverView
+@interface LiteraryClockScreenSaverView : ScreenSaverView {
+    NSImage* libraryImage1;
+    CGFloat backgroundImageX;
+    NSRect backgroundImageRect;
+}
 
 @property (retain) NSMutableDictionary *timeToQuote;
 @property NSInteger fileLength;
 @property (retain) NSString* resourcePath;
 @property CGFloat lastY;
+
 
 @end
