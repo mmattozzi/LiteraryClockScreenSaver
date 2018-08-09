@@ -23,9 +23,16 @@
         [self setAnimationTimeInterval:1/30.0];
     }
     
-    NSString *pathOfLibraryImage = [[NSBundle bundleForClass:[self class]] pathForResource:@"library1" ofType:@"jpg"];
-    libraryImage1 = [[NSImage alloc] initWithContentsOfFile:pathOfLibraryImage];
-    NSLog(@"Image = %f x %f", [libraryImage1 size].width, [libraryImage1 size].height);
+    backgroundImageIndex = 0;
+    backgroundImageList = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i <= 3; i++) {
+        NSString *fileName = [NSString stringWithFormat:@"library%d", i];
+        NSLog(@"Loading image %@", fileName);
+        NSString *pathOfLibraryImage = [[NSBundle bundleForClass:[self class]] pathForResource:fileName ofType:@"jpg"];
+        NSImage* libraryImage = [[NSImage alloc] initWithContentsOfFile:pathOfLibraryImage];
+        [backgroundImageList addObject:libraryImage];
+    }
     
     NSString* timeFormat = @"^\\d\\d:\\d\\d";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^\\d\\d"
@@ -110,8 +117,11 @@
     backgroundImageRect.origin.x += 0.25;
     if (backgroundImageRect.origin.x > 0) {
         backgroundImageRect.origin.x = 0 - (backgroundImageRect.size.width - self.bounds.size.width);
+        backgroundImageIndex += 1;
+        backgroundImageIndex = backgroundImageIndex % [backgroundImageList count];
     }
-    [libraryImage1 drawInRect:backgroundImageRect];
+    NSLog(@"Using background image: %ld", backgroundImageIndex);
+    [(NSImage*)[backgroundImageList objectAtIndex:backgroundImageIndex] drawInRect:backgroundImageRect];
     
     HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
     if (lastY > self.bounds.size.height) {

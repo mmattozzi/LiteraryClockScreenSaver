@@ -9,9 +9,10 @@
 #import <ScreenSaver/ScreenSaver.h>
 
 @interface LiteraryClockScreenSaverView : ScreenSaverView {
-    NSImage* libraryImage1;
     CGFloat backgroundImageX;
     NSRect backgroundImageRect;
+    NSMutableArray* backgroundImageList;
+    NSUInteger backgroundImageIndex;
 }
 
 @property (retain) NSMutableDictionary *timeToQuote;

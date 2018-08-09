@@ -13,6 +13,8 @@
 		AF75D33C2119428C00E918C5 /* HighlightedQuote.h in Headers */ = {isa = PBXBuildFile; fileRef = AF75D33A2119428C00E918C5 /* HighlightedQuote.h */; };
 		AF75D33D2119428C00E918C5 /* HighlightedQuote.m in Sources */ = {isa = PBXBuildFile; fileRef = AF75D33B2119428C00E918C5 /* HighlightedQuote.m */; };
 		AF75D340211A968900E918C5 /* library1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D33F211A968900E918C5 /* library1.jpg */; };
+		AF75D343211BE6CB00E918C5 /* library3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D341211BE6CB00E918C5 /* library3.jpg */; };
+		AF75D344211BE6CB00E918C5 /* library2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D342211BE6CB00E918C5 /* library2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		AF75D33A2119428C00E918C5 /* HighlightedQuote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighlightedQuote.h; sourceTree = "<group>"; };
 		AF75D33B2119428C00E918C5 /* HighlightedQuote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HighlightedQuote.m; sourceTree = "<group>"; };
 		AF75D33F211A968900E918C5 /* library1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library1.jpg; sourceTree = "<group>"; };
+		AF75D341211BE6CB00E918C5 /* library3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library3.jpg; sourceTree = "<group>"; };
+		AF75D342211BE6CB00E918C5 /* library2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 		AF75D33E211A965900E918C5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AF75D342211BE6CB00E918C5 /* library2.jpg */,
+				AF75D341211BE6CB00E918C5 /* library3.jpg */,
 				AF75D33F211A968900E918C5 /* library1.jpg */,
 			);
 			name = images;
@@ -145,7 +151,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF75D343211BE6CB00E918C5 /* library3.jpg in Resources */,
 				AF75D3392117FB6000E918C5 /* litclock_annotated.csv in Resources */,
+				AF75D344211BE6CB00E918C5 /* library2.jpg in Resources */,
 				AF75D340211A968900E918C5 /* library1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
