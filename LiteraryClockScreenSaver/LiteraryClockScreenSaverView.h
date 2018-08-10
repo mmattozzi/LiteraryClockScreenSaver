@@ -20,4 +20,6 @@
 @property NSInteger fileLength;
 @property (retain) NSString* resourcePath;
 
+- (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str;
+
 @end
