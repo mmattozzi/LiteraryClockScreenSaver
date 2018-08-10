@@ -125,23 +125,27 @@
     
     HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
     if (lastY > self.bounds.size.height) {
-        lastY = 0;
+        lastY = -200.0;
     }
     NSRect quoteRect = self.bounds;
     quoteRect.origin.y = lastY;
     quoteRect.origin.x = 100.0;
     quoteRect.size.width = quoteRect.size.width - 200.0;
-    quoteRect.size.height = 100.0;
+    quoteRect.size.height = 200.0;
     
-    NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:24.0];
+    NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:36.0];
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
-    NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:36.0];
+    NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:48.0];
     
     if (timeQuote) {
         NSMutableAttributedString *highlightedString = [[NSMutableAttributedString alloc] initWithString:timeQuote.quote];
         NSRange fullStringRange = NSMakeRange(0, [highlightedString length]);
         [highlightedString beginEditing];
         [highlightedString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:fullStringRange];
+        NSShadow *shadow = [[NSShadow alloc] init];
+        shadow.shadowOffset = NSMakeSize(-5, -5);
+        shadow.shadowColor = [NSColor colorWithSRGBRed:0.0 green:0.0 blue:0.0 alpha:0.75];
+        [highlightedString addAttribute:NSShadowAttributeName value:shadow range:fullStringRange];
         [highlightedString addAttribute:NSFontAttributeName value:font range:fullStringRange];
         [highlightedString addAttribute:NSFontAttributeName value:boldFontName range:[timeQuote rangeOfHighlight]];
         [highlightedString endEditing];
