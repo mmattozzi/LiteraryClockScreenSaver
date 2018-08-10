@@ -101,6 +101,7 @@
     NSDateComponents *dateComponents = [gregorian components:(NSHourCalendarUnit  | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:now];
     NSInteger hour = [dateComponents hour];
     NSInteger minute = [dateComponents minute];
+    NSInteger second = [dateComponents second];
     
     NSString *paddedHour = [NSString stringWithFormat:@"%02ld", hour];
     NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
@@ -132,18 +133,35 @@
     quoteRect.size.width = quoteRect.size.width - 200.0;
     quoteRect.size.height = 200.0;
     
+    NSRect creditRect = NSMakeRect(self.bounds.size.width*.6, self.bounds.size.height*.1,
+                                   self.bounds.size.width*.2, self.bounds.size.height*.2);
+    
     
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:48.0];
     
     if (timeQuote) {
+        // Wait until last 20 seconds to reveal book and author
+        if (second > 40) {
+            NSFont *creditFont = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:24.0];
+            NSString *credit = [NSString stringWithFormat:@"%@, %@", timeQuote.book, timeQuote.author];
+            NSShadow *shadow = [[NSShadow alloc] init];
+            shadow.shadowOffset = NSMakeSize(-5, -5);
+            shadow.shadowColor = [NSColor colorWithSRGBRed:0.0 green:0.0 blue:0.0 alpha:0.75];
+            [credit drawInRect:creditRect withAttributes:@{
+               NSFontAttributeName: creditFont,
+               NSForegroundColorAttributeName: [NSColor lightGrayColor],
+               NSShadowAttributeName: shadow
+           }];
+        }
+        
         NSMutableAttributedString *highlightedString = [[NSMutableAttributedString alloc] initWithString:timeQuote.quote];
         [highlightedString beginEditing];
         [self addBasicMainTextAttributes:highlightedString];
         [highlightedString addAttribute:NSFontAttributeName value:boldFontName range:[timeQuote rangeOfHighlight]];
         [highlightedString endEditing];
-        
         [highlightedString drawInRect:quoteRect];
+        
     } else {
         NSMutableAttributedString *attributedTimeString = [[NSMutableAttributedString alloc] initWithString:formattedTime];
         [attributedTimeString beginEditing];
