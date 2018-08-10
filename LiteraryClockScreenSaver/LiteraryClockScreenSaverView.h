@@ -13,12 +13,11 @@
     NSRect backgroundImageRect;
     NSMutableArray* backgroundImageList;
     NSUInteger backgroundImageIndex;
+    CGFloat textPositionY;
 }
 
 @property (retain) NSMutableDictionary *timeToQuote;
 @property NSInteger fileLength;
 @property (retain) NSString* resourcePath;
-@property CGFloat lastY;
-
 
 @end

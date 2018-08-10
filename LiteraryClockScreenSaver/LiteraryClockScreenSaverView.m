@@ -14,7 +14,6 @@
 @synthesize timeToQuote;
 @synthesize fileLength;
 @synthesize resourcePath;
-@synthesize lastY;
 
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview
 {
@@ -39,7 +38,7 @@
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:nil];
     
-    lastY = 200.0;
+    textPositionY = 200.0;
     backgroundImageRect = self.bounds;
     backgroundImageRect.size.height = backgroundImageRect.size.height*1.2;
     backgroundImageRect.size.width = backgroundImageRect.size.width*1.2;
@@ -124,11 +123,11 @@
     [(NSImage*)[backgroundImageList objectAtIndex:backgroundImageIndex] drawInRect:backgroundImageRect];
     
     HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
-    if (lastY > self.bounds.size.height) {
-        lastY = -200.0;
+    if (textPositionY > self.bounds.size.height) {
+        textPositionY = -200.0;
     }
     NSRect quoteRect = self.bounds;
-    quoteRect.origin.y = lastY;
+    quoteRect.origin.y = textPositionY;
     quoteRect.origin.x = 100.0;
     quoteRect.size.width = quoteRect.size.width - 200.0;
     quoteRect.size.height = 200.0;
@@ -159,7 +158,7 @@
     }
     
     // Scroll bottom to top, slowly
-    lastY = lastY + 1;
+    textPositionY = textPositionY + 0.5;
     
     // Debug string
     /*
