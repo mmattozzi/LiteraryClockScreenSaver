@@ -14,6 +14,7 @@
 @synthesize timeToQuote;
 @synthesize fileLength;
 @synthesize resourcePath;
+@synthesize configureSheetController;
 
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview
 {
@@ -21,6 +22,8 @@
     if (self) {
         [self setAnimationTimeInterval:1/30.0];
     }
+    
+    configureSheetController = [[ConfigureSheetController alloc] initWithWindowNibName:@"ConfigureSheet"];
     
     backgroundImageIndex = 0;
     backgroundImageList = [[NSMutableArray alloc] init];
@@ -120,7 +123,6 @@
         backgroundImageIndex += 1;
         backgroundImageIndex = backgroundImageIndex % [backgroundImageList count];
     }
-    NSLog(@"Using background image: %ld", backgroundImageIndex);
     [(NSImage*)[backgroundImageList objectAtIndex:backgroundImageIndex] drawInRect:backgroundImageRect];
     
     HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
@@ -195,12 +197,12 @@
 
 - (BOOL)hasConfigureSheet
 {
-    return NO;
+    return YES;
 }
 
 - (NSWindow*)configureSheet
 {
-    return nil;
+    return [configureSheetController window];
 }
 
 @end

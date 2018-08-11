@@ -7,6 +7,7 @@
 //
 
 #import <ScreenSaver/ScreenSaver.h>
+#import "ConfigureSheetController.h"
 
 @interface LiteraryClockScreenSaverView : ScreenSaverView {
     CGFloat backgroundImageX;
@@ -19,6 +20,7 @@
 @property (retain) NSMutableDictionary *timeToQuote;
 @property NSInteger fileLength;
 @property (retain) NSString* resourcePath;
+@property (retain) ConfigureSheetController* configureSheetController;
 
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str;
 

@@ -15,6 +15,10 @@
 		AF75D340211A968900E918C5 /* library1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D33F211A968900E918C5 /* library1.jpg */; };
 		AF75D343211BE6CB00E918C5 /* library3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D341211BE6CB00E918C5 /* library3.jpg */; };
 		AF75D344211BE6CB00E918C5 /* library2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D342211BE6CB00E918C5 /* library2.jpg */; };
+		AF75D346211E8ECF00E918C5 /* ConfigureSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF75D345211E8ECF00E918C5 /* ConfigureSheet.xib */; };
+		AF75D349211E920E00E918C5 /* ConfigureSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = AF75D347211E920E00E918C5 /* ConfigureSheetController.h */; };
+		AF75D34A211E920E00E918C5 /* ConfigureSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF75D348211E920E00E918C5 /* ConfigureSheetController.m */; };
+		AF75D34C211E969600E918C5 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = AF75D34B211E969500E918C5 /* LICENSE.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		AF75D33F211A968900E918C5 /* library1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library1.jpg; sourceTree = "<group>"; };
 		AF75D341211BE6CB00E918C5 /* library3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library3.jpg; sourceTree = "<group>"; };
 		AF75D342211BE6CB00E918C5 /* library2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library2.jpg; sourceTree = "<group>"; };
+		AF75D345211E8ECF00E918C5 /* ConfigureSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigureSheet.xib; sourceTree = "<group>"; };
+		AF75D347211E920E00E918C5 /* ConfigureSheetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfigureSheetController.h; sourceTree = "<group>"; };
+		AF75D348211E920E00E918C5 /* ConfigureSheetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigureSheetController.m; sourceTree = "<group>"; };
+		AF75D34B211E969500E918C5 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,11 +70,15 @@
 		AF75D32D2117FB2F00E918C5 /* LiteraryClockScreenSaver */ = {
 			isa = PBXGroup;
 			children = (
+				AF75D34B211E969500E918C5 /* LICENSE.txt */,
 				AF75D32E2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h */,
 				AF75D3302117FB2F00E918C5 /* LiteraryClockScreenSaverView.m */,
 				AF75D3322117FB2F00E918C5 /* Info.plist */,
 				AF75D33A2119428C00E918C5 /* HighlightedQuote.h */,
 				AF75D33B2119428C00E918C5 /* HighlightedQuote.m */,
+				AF75D345211E8ECF00E918C5 /* ConfigureSheet.xib */,
+				AF75D347211E920E00E918C5 /* ConfigureSheetController.h */,
+				AF75D348211E920E00E918C5 /* ConfigureSheetController.m */,
 			);
 			path = LiteraryClockScreenSaver;
 			sourceTree = "<group>";
@@ -91,6 +103,7 @@
 			files = (
 				AF75D32F2117FB2F00E918C5 /* LiteraryClockScreenSaverView.h in Headers */,
 				AF75D33C2119428C00E918C5 /* HighlightedQuote.h in Headers */,
+				AF75D349211E920E00E918C5 /* ConfigureSheetController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,10 +164,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF75D34C211E969600E918C5 /* LICENSE.txt in Resources */,
 				AF75D343211BE6CB00E918C5 /* library3.jpg in Resources */,
 				AF75D3392117FB6000E918C5 /* litclock_annotated.csv in Resources */,
 				AF75D344211BE6CB00E918C5 /* library2.jpg in Resources */,
 				AF75D340211A968900E918C5 /* library1.jpg in Resources */,
+				AF75D346211E8ECF00E918C5 /* ConfigureSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF75D34A211E920E00E918C5 /* ConfigureSheetController.m in Sources */,
 				AF75D33D2119428C00E918C5 /* HighlightedQuote.m in Sources */,
 				AF75D3312117FB2F00E918C5 /* LiteraryClockScreenSaverView.m in Sources */,
 			);
