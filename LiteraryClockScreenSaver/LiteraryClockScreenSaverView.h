@@ -23,5 +23,6 @@
 @property (retain) ConfigureSheetController* configureSheetController;
 
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str;
+- (NSRect) calculateCreditRect:(NSRect)quoteRect;
 
 @end

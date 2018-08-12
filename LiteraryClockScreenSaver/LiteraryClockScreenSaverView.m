@@ -111,7 +111,7 @@
     NSString *formattedTime = [NSString stringWithFormat:@"%@:%@", paddedHour, paddedMinute];
     
     // Good test time
-    // NSString *formattedTime = @"23:31";
+    // formattedTime = @"23:31";
     
     [[NSColor blackColor] setFill];
     NSRectFill(self.bounds);
@@ -135,10 +135,6 @@
     quoteRect.size.width = quoteRect.size.width - 200.0;
     quoteRect.size.height = 200.0;
     
-    NSRect creditRect = NSMakeRect(self.bounds.size.width*.6, self.bounds.size.height*.1,
-                                   self.bounds.size.width*.2, self.bounds.size.height*.2);
-    
-    
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:48.0];
     
@@ -150,7 +146,7 @@
             NSShadow *shadow = [[NSShadow alloc] init];
             shadow.shadowOffset = NSMakeSize(-5, -5);
             shadow.shadowColor = [NSColor colorWithSRGBRed:0.0 green:0.0 blue:0.0 alpha:0.75];
-            [credit drawInRect:creditRect withAttributes:@{
+            [credit drawInRect:[self calculateCreditRect:quoteRect] withAttributes:@{
                NSFontAttributeName: creditFont,
                NSForegroundColorAttributeName: [NSColor lightGrayColor],
                NSShadowAttributeName: shadow
@@ -182,6 +178,21 @@
                                                                        NSForegroundColorAttributeName: [NSColor lightGrayColor]
                                                                        }];
      */
+}
+
+- (NSRect) calculateCreditRect:(NSRect)quoteRect {
+    NSRect creditRect;
+    NSUInteger differenceFromHeight = self.bounds.size.height - quoteRect.origin.y;
+    if (differenceFromHeight > (self.bounds.size.height / 2)) {
+        // Above quote
+        creditRect = NSMakeRect(self.bounds.size.width*.6, (self.bounds.size.height - quoteRect.origin.y)/2 + quoteRect.origin.y,
+                                self.bounds.size.width*.2, self.bounds.size.height*.2);
+    } else {
+        // Below quote
+        creditRect = NSMakeRect(self.bounds.size.width*.6, quoteRect.origin.y /2,
+                                self.bounds.size.width*.2, self.bounds.size.height*.2);
+    }
+    return creditRect;
 }
 
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str {
