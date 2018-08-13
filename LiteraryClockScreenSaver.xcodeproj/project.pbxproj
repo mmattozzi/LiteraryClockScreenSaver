@@ -19,6 +19,7 @@
 		AF75D349211E920E00E918C5 /* ConfigureSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = AF75D347211E920E00E918C5 /* ConfigureSheetController.h */; };
 		AF75D34A211E920E00E918C5 /* ConfigureSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF75D348211E920E00E918C5 /* ConfigureSheetController.m */; };
 		AF75D34C211E969600E918C5 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = AF75D34B211E969500E918C5 /* LICENSE.txt */; };
+		AF75D34E2121309E00E918C5 /* library4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D34D2121309E00E918C5 /* library4.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		AF75D347211E920E00E918C5 /* ConfigureSheetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfigureSheetController.h; sourceTree = "<group>"; };
 		AF75D348211E920E00E918C5 /* ConfigureSheetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigureSheetController.m; sourceTree = "<group>"; };
 		AF75D34B211E969500E918C5 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
+		AF75D34D2121309E00E918C5 /* library4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library4.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		AF75D33E211A965900E918C5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AF75D34D2121309E00E918C5 /* library4.jpg */,
 				AF75D342211BE6CB00E918C5 /* library2.jpg */,
 				AF75D341211BE6CB00E918C5 /* library3.jpg */,
 				AF75D33F211A968900E918C5 /* library1.jpg */,
@@ -164,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF75D34E2121309E00E918C5 /* library4.jpg in Resources */,
 				AF75D34C211E969600E918C5 /* LICENSE.txt in Resources */,
 				AF75D343211BE6CB00E918C5 /* library3.jpg in Resources */,
 				AF75D3392117FB6000E918C5 /* litclock_annotated.csv in Resources */,
