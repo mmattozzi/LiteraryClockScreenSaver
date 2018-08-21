@@ -27,6 +27,7 @@
     
     backgroundImageIndex = 0;
     backgroundImageList = [[NSMutableArray alloc] init];
+    lastRenderedTime = nil;
     
     for (int i = 1; i <= 6; i++) {
         NSString *fileName = [NSString stringWithFormat:@"library%d", i];
@@ -67,7 +68,13 @@
             NSArray* columns = [row componentsSeparatedByString:@"|"];
             if ([columns count] == 5) {
                 HighlightedQuote *highlightedQuote = [HighlightedQuote initWithQuote:columns[2] author:columns[4] book:columns[3] timeString:columns[1]];
-                [timeToQuote setObject:highlightedQuote forKey:columns[0]];
+                NSString *timeOfQuote = columns[0];
+                if (! [timeToQuote objectForKey:timeOfQuote]) {
+                    [timeToQuote setObject:[[NSMutableArray alloc] initWithObjects:highlightedQuote, nil] forKey:timeOfQuote];
+                } else {
+                    NSMutableArray *existingList = [timeToQuote objectForKey:timeOfQuote];
+                    [existingList addObject:highlightedQuote];
+                }
             } else {
                 NSLog(@"%@ does not seem formatted correctly; not enough columns.", row);
             }
@@ -110,8 +117,14 @@
     NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
     NSString *formattedTime = [NSString stringWithFormat:@"%@:%@", paddedHour, paddedMinute];
     
-    // Good test time
-    // formattedTime = @"23:31";
+    // Uncomment to run with a fixed time
+    // formattedTime = @"00:00";
+    
+    // Whenever the time changes between frames, draw a new random number
+    if (! [formattedTime isEqualToString:lastRenderedTime]) {
+        currentRandom = arc4random_uniform(10000);
+        lastRenderedTime = formattedTime;
+    }
     
     [[NSColor blackColor] setFill];
     NSRectFill(self.bounds);
@@ -125,7 +138,12 @@
     }
     [(NSImage*)[backgroundImageList objectAtIndex:backgroundImageIndex] drawInRect:backgroundImageRect];
     
-    HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
+    //HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
+    HighlightedQuote *timeQuote = nil;
+    NSMutableArray *quoteList = [timeToQuote valueForKey:formattedTime];
+    if (quoteList && [quoteList count] > 0) {
+        timeQuote = quoteList[currentRandom % [quoteList count]];
+    }
     if (textPositionY > self.bounds.size.height) {
         textPositionY = -200.0;
     }
@@ -161,6 +179,7 @@
         [highlightedString drawInRect:quoteRect];
         
     } else {
+        // Render times that we don't have a quote for
         NSMutableAttributedString *attributedTimeString = [[NSMutableAttributedString alloc] initWithString:formattedTime];
         [attributedTimeString beginEditing];
         [self addBasicMainTextAttributes:attributedTimeString];
@@ -170,14 +189,6 @@
     
     // Scroll bottom to top, slowly
     textPositionY = textPositionY + 0.5;
-    
-    // Debug string
-    /*
-    NSString *infoString = [NSString stringWithFormat:@"Path: %@, File length: %ld, Quote count: %ld, Time string: %@", resourcePath, fileLength, [timeToQuote count], formattedTime];
-    [infoString drawAtPoint:NSMakePoint(100.0, 100.0) withAttributes:@{
-                                                                       NSForegroundColorAttributeName: [NSColor lightGrayColor]
-                                                                       }];
-     */
 }
 
 - (NSRect) calculateCreditRect:(NSRect)quoteRect {

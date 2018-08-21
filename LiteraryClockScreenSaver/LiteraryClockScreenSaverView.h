@@ -15,6 +15,8 @@
     NSMutableArray* backgroundImageList;
     NSUInteger backgroundImageIndex;
     CGFloat textPositionY;
+    NSString *lastRenderedTime;
+    NSUInteger currentRandom;
 }
 
 @property (retain) NSMutableDictionary *timeToQuote;
