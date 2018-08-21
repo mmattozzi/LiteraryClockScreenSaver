@@ -8,7 +8,8 @@ https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/ project crea
 
 ## Installation
 * Open DMG
-* Right click on `LiteraryClockScreenSaver.saver` and choose `Open With...` => `System Preferences`
+* Right click on `LiteraryClockScreenSaver.saver`
+* Choose `Open With...` :arrow_right: `System Preferences`
 * Select whether you want to install the screen saver for the current user or for all users
 
 ## Data Sources
