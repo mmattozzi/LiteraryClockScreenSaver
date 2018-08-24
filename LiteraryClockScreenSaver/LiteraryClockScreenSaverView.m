@@ -118,7 +118,8 @@
     NSString *formattedTime = [NSString stringWithFormat:@"%@:%@", paddedHour, paddedMinute];
     
     // Uncomment to run with a fixed time
-    // formattedTime = @"00:00";
+    // formattedTime = @"03:05";
+    // second = 45;
     
     // Whenever the time changes between frames, draw a new random number
     if (! [formattedTime isEqualToString:lastRenderedTime]) {
@@ -151,7 +152,7 @@
     quoteRect.origin.y = textPositionY;
     quoteRect.origin.x = 100.0;
     quoteRect.size.width = quoteRect.size.width - 200.0;
-    quoteRect.size.height = 200.0;
+    quoteRect.size.height = 300.0;
     
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:48.0];
@@ -162,11 +163,11 @@
             NSFont *creditFont = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:24.0];
             NSString *credit = [NSString stringWithFormat:@"%@, %@", timeQuote.book, timeQuote.author];
             NSShadow *shadow = [[NSShadow alloc] init];
-            shadow.shadowOffset = NSMakeSize(-5, -5);
+            shadow.shadowOffset = NSMakeSize(-3, -3);
             shadow.shadowColor = [NSColor colorWithSRGBRed:0.0 green:0.0 blue:0.0 alpha:0.75];
             [credit drawInRect:[self calculateCreditRect:quoteRect] withAttributes:@{
                NSFontAttributeName: creditFont,
-               NSForegroundColorAttributeName: [NSColor lightGrayColor],
+               NSForegroundColorAttributeName: [NSColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0],
                NSShadowAttributeName: shadow
            }];
         }
