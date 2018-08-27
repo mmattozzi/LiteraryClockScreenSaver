@@ -29,7 +29,7 @@
     backgroundImageList = [[NSMutableArray alloc] init];
     lastRenderedTime = nil;
     
-    for (int i = 1; i <= 6; i++) {
+    for (int i = 1; i <= 7; i++) {
         NSString *fileName = [NSString stringWithFormat:@"library%d", i];
         NSLog(@"Loading image %@", fileName);
         NSString *pathOfLibraryImage = [[NSBundle bundleForClass:[self class]] pathForResource:fileName ofType:@"jpg"];
