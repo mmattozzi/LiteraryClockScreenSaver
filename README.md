@@ -7,7 +7,7 @@ https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/ project crea
 ![Screenshot](https://github.com/mmattozzi/LiteraryClockScreenSaver/raw/master/litclocksaver-screenshot.jpg)
 
 ## Installation
-* Download DMG from [Releases page](https://github.com/mmattozzi/LiteraryClockScreenSaver/releases)
+* Download DMG from [Releases page](https://github.com/mmattozzi/LiteraryClockScreenSaver/releases/latest)
 * Open DMG
 * Right click on `LiteraryClockScreenSaver.saver`
 * Choose `Open With...` :arrow_right: `System Preferences`
