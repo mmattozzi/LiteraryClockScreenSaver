@@ -158,8 +158,8 @@
     if (quoteList && [quoteList count] > 0) {
         timeQuote = quoteList[currentRandom % [quoteList count]];
     }
-    if (textPositionY > self.bounds.size.height) {
-        textPositionY = -200.0;
+    if (textPositionY > self.bounds.size.height - 150) {
+        textPositionY = -150.0;
     }
     NSRect quoteRect = self.bounds;
     quoteRect.origin.y = textPositionY;
