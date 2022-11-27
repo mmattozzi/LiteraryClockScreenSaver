@@ -3,6 +3,9 @@ MacOS screen saver to display time via literary quotes. Based on the way cooler
 https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/ project created by 
 [tjaap](https://www.instructables.com/member/tjaap/).
 
+## !! NOTE: Broken on modern MacOS 😞 !!
+Starting with (I think) MacOS 11 / Big Sur, there does not seem to be a way to run an unsigned screen saver application due to increased restrictions by  Gatekeeper. However, I also haven't figured out how to create a signed screen saver with my Apple developer certificate because there's almost no documentation on creating or distributing mac screen savers these days. If you're somebody out there who can help, please comment on [Issue #1](https://github.com/mmattozzi/LiteraryClockScreenSaver/issues/1)!
+
 ## Screenshot
 ![Screenshot](https://github.com/mmattozzi/LiteraryClockScreenSaver/raw/master/litclocksaver-screenshot.jpg)
 
