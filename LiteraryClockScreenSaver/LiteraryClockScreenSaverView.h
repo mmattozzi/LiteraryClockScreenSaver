@@ -39,5 +39,6 @@
 
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str;
 - (NSRect) calculateCreditRect:(NSRect)quoteRect;
+- (void) drawOneFrame;
 
 @end

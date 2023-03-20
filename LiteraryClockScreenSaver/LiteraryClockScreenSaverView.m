@@ -114,9 +114,15 @@
 - (void)drawRect:(NSRect)rect
 {
     [super drawRect:rect];
+    [self drawOneFrame];
 }
 
 - (void)animateOneFrame
+{
+    self.needsDisplay = TRUE;
+}
+
+- (void)drawOneFrame
 {
     NSDate* now = [NSDate date];
     
