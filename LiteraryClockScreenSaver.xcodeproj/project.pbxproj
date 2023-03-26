@@ -23,6 +23,7 @@
 		AF75D350212520FD00E918C5 /* library5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D34F212520FD00E918C5 /* library5.jpg */; };
 		AF75D3522129FD7600E918C5 /* library6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D3512129FD7600E918C5 /* library6.jpg */; };
 		AF75D3542133A64B00E918C5 /* library7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D3532133A64B00E918C5 /* library7.jpg */; };
+		AFD6032C29CE42D1007BF7D1 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD6032B29CE42D1007BF7D1 /* Quartz.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		AF75D34F212520FD00E918C5 /* library5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library5.jpg; sourceTree = "<group>"; };
 		AF75D3512129FD7600E918C5 /* library6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library6.jpg; sourceTree = "<group>"; };
 		AF75D3532133A64B00E918C5 /* library7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library7.jpg; sourceTree = "<group>"; };
+		AFD6032B29CE42D1007BF7D1 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFD6032C29CE42D1007BF7D1 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +67,7 @@
 				AF75D33E211A965900E918C5 /* images */,
 				AF75D32D2117FB2F00E918C5 /* LiteraryClockScreenSaver */,
 				AF75D32C2117FB2F00E918C5 /* Products */,
+				AFD6032A29CE42D1007BF7D1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +108,14 @@
 			);
 			name = images;
 			path = LiteraryClockScreenSaver/images;
+			sourceTree = "<group>";
+		};
+		AFD6032A29CE42D1007BF7D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFD6032B29CE42D1007BF7D1 /* Quartz.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,7 +337,7 @@
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = V3RDC2WXT3;
 				INFOPLIST_FILE = LiteraryClockScreenSaver/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				INSTALL_PATH = /;
 				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = restlesscode.org.LiteraryClockScreenSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -342,7 +354,7 @@
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = V3RDC2WXT3;
 				INFOPLIST_FILE = LiteraryClockScreenSaver/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				INSTALL_PATH = /;
 				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = restlesscode.org.LiteraryClockScreenSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";

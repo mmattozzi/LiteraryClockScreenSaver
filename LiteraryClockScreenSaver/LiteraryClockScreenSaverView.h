@@ -21,6 +21,8 @@
 
 #import <ScreenSaver/ScreenSaver.h>
 #import "ConfigureSheetController.h"
+#import <QuartzCore/CoreAnimation.h>
+#import "HighlightedQuote.h"
 
 @interface LiteraryClockScreenSaverView : ScreenSaverView {
     CGFloat backgroundImageX;
@@ -30,6 +32,11 @@
     CGFloat textPositionY;
     NSString *lastRenderedTime;
     NSUInteger currentRandom;
+    NSView *box;
+    CALayer *mainLayer;
+    CALayer *backgroundImageLayer;
+    CATextLayer *quoteTextLayer;
+    HighlightedQuote *currentQuote;
 }
 
 @property (retain) NSMutableDictionary *timeToQuote;
@@ -40,5 +47,9 @@
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str;
 - (NSRect) calculateCreditRect:(NSRect)quoteRect;
 - (void) drawOneFrame;
+- (void) setupTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote;
+- (NSString*) createFormattedTime;
+- (BOOL) selectNextQuote;
+- (void) resumeAnimation;
 
 @end

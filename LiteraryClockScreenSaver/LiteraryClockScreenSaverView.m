@@ -3,7 +3,7 @@
 //  LiteraryClockScreenSaver
 //
 //  Created by Mike Mattozzi on 8/5/18.
-//  Copyright © 2018 Mike Mattozzi.
+//  Copyright © 2023 Mike Mattozzi.
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview
 {
     self = [super initWithFrame:frame isPreview:isPreview];
+    
     if (self) {
         [self setAnimationTimeInterval:1/30.0];
     }
@@ -98,12 +99,66 @@
     
     NSLog(@"Done loading quotes. %ld quotes stored.", [timeToQuote count]);
     
+    // Set up the layer for the screensaver
+    mainLayer = [CALayer layer];
+    mainLayer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    mainLayer.backgroundColor = CGColorCreateGenericRGB(0.0, 0.0, 0.0, 1.0); // black background
+    [self setLayer:mainLayer];
+    [self setWantsLayer:YES];
+    
+    backgroundImageLayer = [CALayer layer];
+    [backgroundImageLayer setBounds:CGRectMake(0, 0, [mainLayer bounds].size.width*1.2, [mainLayer bounds].size.height*1.2)];
+    [backgroundImageLayer setPosition:CGPointMake([mainLayer bounds].size.width/2.0, [mainLayer bounds].size.height/2.0)];
+    backgroundImageLayer.contents = [backgroundImageList objectAtIndex:backgroundImageIndex];
+    [backgroundImageLayer setContentsScale:[[NSScreen mainScreen] backingScaleFactor]];
+    [backgroundImageLayer setContentsGravity:kCAGravityResizeAspectFill];
+    [mainLayer addSublayer:backgroundImageLayer];
+    
+    // Create a new CATextLayer
+    quoteTextLayer = [CATextLayer layer];
+
+    [self selectNextQuote];
+    [self setupTextLayerPropertiesWithTextLayer:quoteTextLayer textContents:currentQuote];
+
+    // Set the layer bounds and position
+    [quoteTextLayer setBounds:CGRectMake(0.0, 0.0, mainLayer.bounds.size.width*.8, mainLayer.bounds.size.height*.25)];
+    [quoteTextLayer setPosition:CGPointMake(mainLayer.bounds.size.width*.45, mainLayer.bounds.size.height*.1)];
+
+    // Add the layer to a parent layer or view
+    [mainLayer addSublayer:quoteTextLayer];
+    
     return self;
 }
 
 - (void)startAnimation
 {
     [super startAnimation];
+    [self resumeAnimation];
+}
+
+- (void) setupTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote {
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:48.0];
+    
+    NSMutableAttributedString *highlightedString;
+    if (quote) {
+        highlightedString = [[NSMutableAttributedString alloc] initWithString:quote.quote];
+        [highlightedString beginEditing];
+        [self addBasicMainTextAttributes:highlightedString];
+        [highlightedString addAttribute:NSFontAttributeName value:boldFontName range:[quote rangeOfHighlight]];
+        [highlightedString endEditing];
+    } else {
+        highlightedString = [[NSMutableAttributedString alloc] initWithString:[self createFormattedTime]];
+        [highlightedString beginEditing];
+        [self addBasicMainTextAttributes:highlightedString];
+        [highlightedString endEditing];
+    }
+    
+    [layer setString:highlightedString];
+    
+    // Set the alignment and wrapping mode
+    [layer setAlignmentMode:kCAAlignmentCenter];
+    [layer setWrapped:YES];
 }
 
 - (void)stopAnimation
@@ -114,12 +169,86 @@
 - (void)drawRect:(NSRect)rect
 {
     [super drawRect:rect];
-    [self drawOneFrame];
+}
+
+- (void)resumeAnimation {
+    CABasicAnimation *backgroundImageAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+    backgroundImageAnimation.fromValue = @([backgroundImageLayer position].x);
+    if ([backgroundImageLayer position].x > 0) {
+        backgroundImageAnimation.toValue = @([backgroundImageLayer position].x - [mainLayer bounds].size.width*0.1);
+    } else {
+        backgroundImageAnimation.toValue = @([backgroundImageLayer position].x + [mainLayer bounds].size.width*0.1);
+    }
+    backgroundImageAnimation.duration = 60.0;
+    backgroundImageAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    backgroundImageAnimation.fillMode = kCAFillModeForwards;
+    backgroundImageAnimation.removedOnCompletion = NO;
+    [backgroundImageLayer addAnimation:backgroundImageAnimation forKey:@"position.x"];
+    
+    CABasicAnimation *textAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    textAnimation.fromValue = @([quoteTextLayer position].y);
+    textAnimation.toValue = @([quoteTextLayer position].y + mainLayer.bounds.size.height*.4);
+    textAnimation.duration = 60.0;
+    textAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    textAnimation.fillMode = kCAFillModeForwards;
+    textAnimation.removedOnCompletion = NO;
+    [quoteTextLayer addAnimation:textAnimation forKey:@"position.y"];
 }
 
 - (void)animateOneFrame
 {
-    self.needsDisplay = TRUE;
+    BOOL quoteChanged = [self selectNextQuote];
+    
+    if (quoteChanged) {
+        [backgroundImageLayer removeAllAnimations];
+        [quoteTextLayer removeAllAnimations];
+        
+        backgroundImageIndex += 1;
+        backgroundImageIndex = backgroundImageIndex % [backgroundImageList count];
+        backgroundImageLayer.contents = [backgroundImageList objectAtIndex:backgroundImageIndex];
+        
+        [self setupTextLayerPropertiesWithTextLayer:quoteTextLayer textContents:currentQuote];
+        
+        [self resumeAnimation];
+    }
+}
+
+- (NSString*) createFormattedTime {
+    NSDate* now = [NSDate date];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponents = [gregorian components:(NSHourCalendarUnit  | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:now];
+    NSInteger hour = [dateComponents hour];
+    NSInteger minute = [dateComponents minute];
+    NSInteger second = [dateComponents second];
+    
+    NSString *paddedHour = [NSString stringWithFormat:@"%02ld", hour];
+    NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
+    NSString *formattedTime = [NSString stringWithFormat:@"%@:%@", paddedHour, paddedMinute];
+    
+    return formattedTime;
+}
+
+- (BOOL) selectNextQuote {
+    NSString *formattedTime = [self createFormattedTime];
+    BOOL quoteChanged = NO;
+    
+    // Whenever the time changes between frames, draw a new random number
+    if (! [formattedTime isEqualToString:lastRenderedTime]) {
+        currentRandom = arc4random_uniform(10000);
+        lastRenderedTime = formattedTime;
+        quoteChanged = YES;
+        
+        HighlightedQuote *timeQuote = nil;
+        NSMutableArray *quoteList = [timeToQuote valueForKey:formattedTime];
+        if (quoteList && [quoteList count] > 0) {
+            timeQuote = quoteList[currentRandom % [quoteList count]];
+        }
+        
+        currentQuote = timeQuote;
+    }
+    
+    return quoteChanged;
 }
 
 - (void)drawOneFrame
