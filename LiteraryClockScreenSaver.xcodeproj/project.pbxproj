@@ -338,6 +338,7 @@
 				DEVELOPMENT_TEAM = V3RDC2WXT3;
 				INFOPLIST_FILE = LiteraryClockScreenSaver/Info.plist;
 				INSTALL_PATH = /;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = restlesscode.org.LiteraryClockScreenSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -355,6 +356,7 @@
 				DEVELOPMENT_TEAM = V3RDC2WXT3;
 				INFOPLIST_FILE = LiteraryClockScreenSaver/Info.plist;
 				INSTALL_PATH = /;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = restlesscode.org.LiteraryClockScreenSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
