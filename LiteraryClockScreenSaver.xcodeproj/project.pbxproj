@@ -24,6 +24,11 @@
 		AF75D3522129FD7600E918C5 /* library6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D3512129FD7600E918C5 /* library6.jpg */; };
 		AF75D3542133A64B00E918C5 /* library7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF75D3532133A64B00E918C5 /* library7.jpg */; };
 		AFD6032C29CE42D1007BF7D1 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD6032B29CE42D1007BF7D1 /* Quartz.framework */; };
+		AFD6037729D29C0D007BF7D1 /* library8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFD6037629D29C0D007BF7D1 /* library8.jpg */; };
+		AFD6037929D29C25007BF7D1 /* library9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFD6037829D29C25007BF7D1 /* library9.jpg */; };
+		AFD6037B29D29C2C007BF7D1 /* library10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFD6037A29D29C2C007BF7D1 /* library10.jpg */; };
+		AFD6037D29D29C33007BF7D1 /* library11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFD6037C29D29C33007BF7D1 /* library11.jpg */; };
+		AFD6037F29D29C3B007BF7D1 /* library12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFD6037E29D29C3B007BF7D1 /* library12.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,11 @@
 		AF75D3512129FD7600E918C5 /* library6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library6.jpg; sourceTree = "<group>"; };
 		AF75D3532133A64B00E918C5 /* library7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library7.jpg; sourceTree = "<group>"; };
 		AFD6032B29CE42D1007BF7D1 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		AFD6037629D29C0D007BF7D1 /* library8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library8.jpg; sourceTree = "<group>"; };
+		AFD6037829D29C25007BF7D1 /* library9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library9.jpg; sourceTree = "<group>"; };
+		AFD6037A29D29C2C007BF7D1 /* library10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library10.jpg; sourceTree = "<group>"; };
+		AFD6037C29D29C33007BF7D1 /* library11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library11.jpg; sourceTree = "<group>"; };
+		AFD6037E29D29C3B007BF7D1 /* library12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = library12.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +108,11 @@
 		AF75D33E211A965900E918C5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AFD6037E29D29C3B007BF7D1 /* library12.jpg */,
+				AFD6037C29D29C33007BF7D1 /* library11.jpg */,
+				AFD6037A29D29C2C007BF7D1 /* library10.jpg */,
+				AFD6037829D29C25007BF7D1 /* library9.jpg */,
+				AFD6037629D29C0D007BF7D1 /* library8.jpg */,
 				AF75D3532133A64B00E918C5 /* library7.jpg */,
 				AF75D3512129FD7600E918C5 /* library6.jpg */,
 				AF75D34F212520FD00E918C5 /* library5.jpg */,
@@ -191,11 +206,16 @@
 				AF75D34E2121309E00E918C5 /* library4.jpg in Resources */,
 				AF75D34C211E969600E918C5 /* LICENSE.txt in Resources */,
 				AF75D343211BE6CB00E918C5 /* library3.jpg in Resources */,
+				AFD6037D29D29C33007BF7D1 /* library11.jpg in Resources */,
+				AFD6037729D29C0D007BF7D1 /* library8.jpg in Resources */,
 				AF75D3522129FD7600E918C5 /* library6.jpg in Resources */,
+				AFD6037B29D29C2C007BF7D1 /* library10.jpg in Resources */,
 				AF75D3392117FB6000E918C5 /* litclock_annotated.csv in Resources */,
 				AF75D344211BE6CB00E918C5 /* library2.jpg in Resources */,
+				AFD6037F29D29C3B007BF7D1 /* library12.jpg in Resources */,
 				AF75D350212520FD00E918C5 /* library5.jpg in Resources */,
 				AF75D3542133A64B00E918C5 /* library7.jpg in Resources */,
+				AFD6037929D29C25007BF7D1 /* library9.jpg in Resources */,
 				AF75D340211A968900E918C5 /* library1.jpg in Resources */,
 				AF75D346211E8ECF00E918C5 /* ConfigureSheet.xib in Resources */,
 			);

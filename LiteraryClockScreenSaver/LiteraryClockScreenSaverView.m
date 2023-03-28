@@ -43,12 +43,19 @@
     backgroundImageList = [[NSMutableArray alloc] init];
     lastRenderedTime = nil;
     
-    for (int i = 1; i <= 7; i++) {
+    for (int i = 1; i <= 12; i++) {
         NSString *fileName = [NSString stringWithFormat:@"library%d", i];
         NSLog(@"Loading image %@", fileName);
         NSString *pathOfLibraryImage = [[NSBundle bundleForClass:[self class]] pathForResource:fileName ofType:@"jpg"];
         NSImage* libraryImage = [[NSImage alloc] initWithContentsOfFile:pathOfLibraryImage];
         [backgroundImageList addObject:libraryImage];
+    }
+    
+    // Shuffle the background image array
+    NSUInteger count = [backgroundImageList count];
+    for (NSUInteger i = count - 1; i > 0; i--) {
+        NSUInteger j = arc4random_uniform((uint32_t)(i + 1));
+        [backgroundImageList exchangeObjectAtIndex:i withObjectAtIndex:j];
     }
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^\\d\\d"
