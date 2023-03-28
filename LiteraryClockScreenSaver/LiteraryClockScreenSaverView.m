@@ -126,6 +126,13 @@
 
     // Add the layer to a parent layer or view
     [mainLayer addSublayer:quoteTextLayer];
+
+    citationLayer = [CATextLayer layer];
+    [citationLayer setBounds:CGRectMake(0.0, 0.0, mainLayer.bounds.size.width*.8, mainLayer.bounds.size.height*.25)];
+    [citationLayer setPosition:CGPointMake(mainLayer.bounds.size.width*.45, mainLayer.bounds.size.height*.1)];
+    citationLayer.opacity = 0.0;
+    [self setupCitatationTextLayerPropertiesWithTextLayer:citationLayer textContents:currentQuote];
+    [mainLayer addSublayer:citationLayer];
     
     return self;
 }
@@ -157,8 +164,22 @@
     [layer setString:highlightedString];
     
     // Set the alignment and wrapping mode
-    [layer setAlignmentMode:kCAAlignmentCenter];
+    [layer setAlignmentMode:kCAAlignmentLeft];
     [layer setWrapped:YES];
+}
+
+- (void) setupCitatationTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote {
+    if (quote) {
+        NSFontManager *fontManager = [NSFontManager sharedFontManager];
+        NSFont *creditFont = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:24.0];
+        NSString *credit = [NSString stringWithFormat:@"%@, %@", quote.book, quote.author];
+        
+        [layer setString:credit];
+        
+        // Set the alignment and wrapping mode
+        [layer setAlignmentMode:kCAAlignmentCenter];
+        [layer setWrapped:YES];
+    }
 }
 
 - (void)stopAnimation
@@ -193,6 +214,28 @@
     textAnimation.fillMode = kCAFillModeForwards;
     textAnimation.removedOnCompletion = NO;
     [quoteTextLayer addAnimation:textAnimation forKey:@"position.y"];
+    
+    NSDate* now = [NSDate date];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponents = [gregorian components:(NSHourCalendarUnit  | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:now];
+    NSInteger second = [dateComponents second];
+    
+    if (second < 15 && currentQuote != nil) {
+        CATextLayer* layer = citationLayer;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(40.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // Create an animation that gradually increases the layer's opacity to 1.0 over a duration of 1 second
+            CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            fadeInAnimation.duration = 1.0;
+            fadeInAnimation.fromValue = @(0.0);
+            fadeInAnimation.toValue = @(1.0);
+            fadeInAnimation.fillMode = kCAFillModeForwards;
+            fadeInAnimation.removedOnCompletion = NO;
+
+            // Add the animation to the layer
+            [layer addAnimation:fadeInAnimation forKey:@"fadeIn"];
+        });
+    }
 }
 
 - (void)animateOneFrame
@@ -202,12 +245,16 @@
     if (quoteChanged) {
         [backgroundImageLayer removeAllAnimations];
         [quoteTextLayer removeAllAnimations];
+        [citationLayer removeAllAnimations];
         
         backgroundImageIndex += 1;
         backgroundImageIndex = backgroundImageIndex % [backgroundImageList count];
         backgroundImageLayer.contents = [backgroundImageList objectAtIndex:backgroundImageIndex];
         
         [self setupTextLayerPropertiesWithTextLayer:quoteTextLayer textContents:currentQuote];
+        
+        citationLayer.opacity = 0.0;
+        [self setupCitatationTextLayerPropertiesWithTextLayer:citationLayer textContents:currentQuote];
         
         [self resumeAnimation];
     }

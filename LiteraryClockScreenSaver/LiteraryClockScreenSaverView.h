@@ -36,6 +36,7 @@
     CALayer *mainLayer;
     CALayer *backgroundImageLayer;
     CATextLayer *quoteTextLayer;
+    CATextLayer *citationLayer;
     HighlightedQuote *currentQuote;
 }
 
@@ -48,6 +49,7 @@
 - (NSRect) calculateCreditRect:(NSRect)quoteRect;
 - (void) drawOneFrame;
 - (void) setupTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote;
+- (void) setupCitatationTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote;
 - (NSString*) createFormattedTime;
 - (BOOL) selectNextQuote;
 - (void) resumeAnimation;
