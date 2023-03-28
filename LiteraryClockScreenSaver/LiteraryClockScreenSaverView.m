@@ -51,7 +51,6 @@
         [backgroundImageList addObject:libraryImage];
     }
     
-    NSString* timeFormat = @"^\\d\\d:\\d\\d";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^\\d\\d"
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:nil];
@@ -81,7 +80,7 @@
         if (numberOfMatches > 0) {
             NSArray* columns = [row componentsSeparatedByString:@"|"];
             if ([columns count] == 5) {
-                HighlightedQuote *highlightedQuote = [HighlightedQuote initWithQuote:columns[2] author:columns[4] book:columns[3] timeString:columns[1]];
+                HighlightedQuote *highlightedQuote = [HighlightedQuote initWithQuote:columns[2] author:columns[4] book:[columns[3] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] timeString:columns[1]];
                 NSString *timeOfQuote = columns[0];
                 if (! [timeToQuote objectForKey:timeOfQuote]) {
                     [timeToQuote setObject:[[NSMutableArray alloc] initWithObjects:highlightedQuote, nil] forKey:timeOfQuote];
@@ -174,6 +173,7 @@
         NSFont *creditFont = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:24.0];
         NSString *credit = [NSString stringWithFormat:@"%@, %@", quote.book, quote.author];
         
+        [layer setFont:(__bridge CTFontRef) creditFont];
         [layer setString:credit];
         
         // Set the alignment and wrapping mode
@@ -267,7 +267,6 @@
     NSDateComponents *dateComponents = [gregorian components:(NSHourCalendarUnit  | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:now];
     NSInteger hour = [dateComponents hour];
     NSInteger minute = [dateComponents minute];
-    NSInteger second = [dateComponents second];
     
     NSString *paddedHour = [NSString stringWithFormat:@"%02ld", hour];
     NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
@@ -296,110 +295,6 @@
     }
     
     return quoteChanged;
-}
-
-- (void)drawOneFrame
-{
-    NSDate* now = [NSDate date];
-    
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponents = [gregorian components:(NSHourCalendarUnit  | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:now];
-    NSInteger hour = [dateComponents hour];
-    NSInteger minute = [dateComponents minute];
-    NSInteger second = [dateComponents second];
-    
-    NSString *paddedHour = [NSString stringWithFormat:@"%02ld", hour];
-    NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
-    NSString *formattedTime = [NSString stringWithFormat:@"%@:%@", paddedHour, paddedMinute];
-    
-    // Uncomment to run with a fixed time
-    // formattedTime = @"03:05";
-    // second = 45;
-    
-    // Whenever the time changes between frames, draw a new random number
-    if (! [formattedTime isEqualToString:lastRenderedTime]) {
-        currentRandom = arc4random_uniform(10000);
-        lastRenderedTime = formattedTime;
-    }
-    
-    [[NSColor blackColor] setFill];
-    NSRectFill(self.bounds);
-    [[NSColor lightGrayColor] set];
-    
-    backgroundImageRect.origin.x += 0.25;
-    if (backgroundImageRect.origin.x > 0) {
-        backgroundImageRect.origin.x = 0 - (backgroundImageRect.size.width - self.bounds.size.width);
-        backgroundImageIndex += 1;
-        backgroundImageIndex = backgroundImageIndex % [backgroundImageList count];
-    }
-    [(NSImage*)[backgroundImageList objectAtIndex:backgroundImageIndex] drawInRect:backgroundImageRect];
-    
-    //HighlightedQuote *timeQuote = [timeToQuote valueForKey:formattedTime];
-    HighlightedQuote *timeQuote = nil;
-    NSMutableArray *quoteList = [timeToQuote valueForKey:formattedTime];
-    if (quoteList && [quoteList count] > 0) {
-        timeQuote = quoteList[currentRandom % [quoteList count]];
-    }
-    if (textPositionY > self.bounds.size.height - 150) {
-        textPositionY = -150.0;
-    }
-    NSRect quoteRect = self.bounds;
-    quoteRect.origin.y = textPositionY;
-    quoteRect.origin.x = 100.0;
-    quoteRect.size.width = quoteRect.size.width - 200.0;
-    quoteRect.size.height = 300.0;
-    
-    NSFontManager *fontManager = [NSFontManager sharedFontManager];
-    NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:48.0];
-    
-    if (timeQuote) {
-        // Wait until last 20 seconds to reveal book and author
-        if (second > 40) {
-            NSFont *creditFont = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:24.0];
-            NSString *credit = [NSString stringWithFormat:@"%@, %@", timeQuote.book, timeQuote.author];
-            NSShadow *shadow = [[NSShadow alloc] init];
-            shadow.shadowOffset = NSMakeSize(-3, -3);
-            shadow.shadowColor = [NSColor colorWithSRGBRed:0.0 green:0.0 blue:0.0 alpha:0.75];
-            [credit drawInRect:[self calculateCreditRect:quoteRect] withAttributes:@{
-               NSFontAttributeName: creditFont,
-               NSForegroundColorAttributeName: [NSColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0],
-               NSShadowAttributeName: shadow
-           }];
-        }
-        
-        NSMutableAttributedString *highlightedString = [[NSMutableAttributedString alloc] initWithString:timeQuote.quote];
-        [highlightedString beginEditing];
-        [self addBasicMainTextAttributes:highlightedString];
-        [highlightedString addAttribute:NSFontAttributeName value:boldFontName range:[timeQuote rangeOfHighlight]];
-        [highlightedString endEditing];
-        [highlightedString drawInRect:quoteRect];
-        
-    } else {
-        // Render times that we don't have a quote for
-        NSMutableAttributedString *attributedTimeString = [[NSMutableAttributedString alloc] initWithString:formattedTime];
-        [attributedTimeString beginEditing];
-        [self addBasicMainTextAttributes:attributedTimeString];
-        [attributedTimeString endEditing];
-        [attributedTimeString drawInRect:quoteRect];
-    }
-    
-    // Scroll bottom to top, slowly
-    textPositionY = textPositionY + 0.5;
-}
-
-- (NSRect) calculateCreditRect:(NSRect)quoteRect {
-    NSRect creditRect;
-    NSUInteger differenceFromHeight = self.bounds.size.height - quoteRect.origin.y;
-    if (differenceFromHeight > (self.bounds.size.height / 2)) {
-        // Above quote
-        creditRect = NSMakeRect(self.bounds.size.width*.6, (self.bounds.size.height - quoteRect.origin.y)/2 + quoteRect.origin.y,
-                                self.bounds.size.width*.2, self.bounds.size.height*.2);
-    } else {
-        // Below quote
-        creditRect = NSMakeRect(self.bounds.size.width*.6, quoteRect.origin.y /2,
-                                self.bounds.size.width*.2, self.bounds.size.height*.2);
-    }
-    return creditRect;
 }
 
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str {

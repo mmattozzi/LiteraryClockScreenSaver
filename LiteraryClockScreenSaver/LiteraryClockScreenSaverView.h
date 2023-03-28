@@ -46,8 +46,6 @@
 @property (retain) ConfigureSheetController* configureSheetController;
 
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str;
-- (NSRect) calculateCreditRect:(NSRect)quoteRect;
-- (void) drawOneFrame;
 - (void) setupTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote;
 - (void) setupCitatationTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote;
 - (NSString*) createFormattedTime;
