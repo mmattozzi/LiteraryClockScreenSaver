@@ -49,6 +49,7 @@
 - (void) setupTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote;
 - (void) setupCitatationTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote;
 - (NSString*) createFormattedTime;
+- (NSString*) createHumanFormattedTime;
 - (BOOL) selectNextQuote;
 - (void) resumeAnimation;
 

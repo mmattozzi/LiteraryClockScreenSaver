@@ -161,7 +161,7 @@
         [highlightedString addAttribute:NSFontAttributeName value:boldFontName range:[quote rangeOfHighlight]];
         [highlightedString endEditing];
     } else {
-        highlightedString = [[NSMutableAttributedString alloc] initWithString:[self createFormattedTime]];
+        highlightedString = [[NSMutableAttributedString alloc] initWithString:[self createHumanFormattedTime]];
         [highlightedString beginEditing];
         [self addBasicMainTextAttributes:highlightedString];
         [highlightedString endEditing];
@@ -278,6 +278,27 @@
     NSString *paddedHour = [NSString stringWithFormat:@"%02ld", hour];
     NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
     NSString *formattedTime = [NSString stringWithFormat:@"%@:%@", paddedHour, paddedMinute];
+    
+    return formattedTime;
+}
+
+- (NSString*) createHumanFormattedTime {
+    NSDate* now = [NSDate date];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponents = [gregorian components:(NSHourCalendarUnit  | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:now];
+    NSInteger hour = [dateComponents hour];
+    NSInteger minute = [dateComponents minute];
+    
+    NSString *ampm = @"am";
+    if (hour > 12) {
+        hour = hour - 12;
+        ampm = @"pm";
+    }
+    
+    NSString *paddedHour = [NSString stringWithFormat:@"%02ld", hour];
+    NSString *paddedMinute = [NSString stringWithFormat:@"%02ld", minute];
+    NSString *formattedTime = [NSString stringWithFormat:@"%@:%@ %@", paddedHour, paddedMinute, ampm];
     
     return formattedTime;
 }
