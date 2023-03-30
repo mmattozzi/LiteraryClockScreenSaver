@@ -1,20 +1,22 @@
 # LiteraryClockScreenSaver
 MacOS screen saver to display time via literary quotes. Based on the way cooler 
 https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/ project created by 
-[tjaap](https://www.instructables.com/member/tjaap/).
+[tjaap](https://www.instructables.com/member/tjaap/). 
 
-## !! NOTE: Broken on modern MacOS 😞 !!
-Starting with (I think) MacOS 11 / Big Sur, there does not seem to be a way to run an unsigned screen saver application due to increased restrictions by  Gatekeeper. However, I also haven't figured out how to create a signed screen saver with my Apple developer certificate because there's almost no documentation on creating or distributing mac screen savers these days. If you're somebody out there who can help, please comment on [Issue #1](https://github.com/mmattozzi/LiteraryClockScreenSaver/issues/1)!
+Available for macOS 11+
 
 ## Screenshot
 ![Screenshot](https://github.com/mmattozzi/LiteraryClockScreenSaver/raw/master/litclocksaver-screenshot.jpg)
 
 ## Installation
-* Download DMG from [Releases page](https://github.com/mmattozzi/LiteraryClockScreenSaver/releases/latest)
-* Open DMG
-* Right click on `LiteraryClockScreenSaver.saver`
-* Choose `Open With...` :arrow_right: `System Preferences`
-* Select whether you want to install the screen saver for the current user or for all users
+* Download zip from [Releases page](https://github.com/mmattozzi/LiteraryClockScreenSaver/releases/latest)
+* Make sure you can install non-app store applications
+  * Open **System Settings** aka **System Preferences**
+  * Open **Privacy & Security**
+  * Set **Allow applications downloaded from** to **App Store and identified developers**
+* Unzip LiteraryClockScreenSaver.saver.zip
+* Double click LiteraryClockScreenSaver.saver or right click and choose Open With System Settings
+* Follow dialog boxes to install
 
 ## Data Sources
 Source of literary quotes also by *tjaap* from link on https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/ 
