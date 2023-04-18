@@ -52,5 +52,6 @@
 - (NSString*) createHumanFormattedTime;
 - (BOOL) selectNextQuote;
 - (void) resumeAnimation;
+- (CGFloat) fontScaleForMultiplier:(CGFloat)multiplier;
 
 @end

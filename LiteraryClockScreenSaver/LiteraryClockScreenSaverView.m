@@ -149,9 +149,17 @@
     [self resumeAnimation];
 }
 
+- (CGFloat) fontScaleForMultiplier:(CGFloat)multiplier {
+    if ([super isPreview]) {
+        return multiplier;
+    } else {
+        return multiplier*6.0;
+    }
+}
+
 - (void) setupTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote {
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
-    NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:48.0];
+    NSFont *boldFontName = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:[self fontScaleForMultiplier:8.0]];
     
     NSMutableAttributedString *highlightedString;
     if (quote) {
@@ -177,7 +185,7 @@
 - (void) setupCitatationTextLayerPropertiesWithTextLayer:(CATextLayer *)layer textContents:(HighlightedQuote *)quote {
     if (quote) {
         NSFontManager *fontManager = [NSFontManager sharedFontManager];
-        NSFont *creditFont = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:24.0];
+        NSFont *creditFont = [fontManager fontWithFamily:@"Lucida Grande" traits:NSBoldFontMask weight:0 size:[self fontScaleForMultiplier:4.0]];
         NSString *credit = [NSString stringWithFormat:@"%@, %@", quote.book, quote.author];
         
         [layer setFont:(__bridge CTFontRef) creditFont];
@@ -326,7 +334,7 @@
 }
 
 - (void) addBasicMainTextAttributes:(NSMutableAttributedString*)str {
-    NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:36.0];
+    NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:[self fontScaleForMultiplier:6.0]];
     NSRange fullStringRange = NSMakeRange(0, [str length]);
     [str addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:fullStringRange];
     NSShadow *shadow = [[NSShadow alloc] init];
